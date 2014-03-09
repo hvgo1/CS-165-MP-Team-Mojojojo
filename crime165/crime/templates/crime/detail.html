@@ -1,0 +1,6 @@
+h1>{{ crime.category }}</h1>
+<ul>
+{% for category in crime.choice_set.all %}
+    <li>{{ category.category_text }}</li>
+{% endfor %}
+</ul>

@@ -1,0 +1,7 @@
+<form action="{% url 'crime/addCategory.html' %}" method="post">                                                            
+  {% csrf_token %}
+  <label for="name"></label>
+  <input type="text" name="name" id="name" />
+  <input type="submit" />
+</form>
+

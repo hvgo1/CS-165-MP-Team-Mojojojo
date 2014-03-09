@@ -1,0 +1,12 @@
+{% extends "crime/base.html" %}
+{% block title %} Category {% endblock %}
+
+{% block content %}
+  <form action="index.html" method="post">                                                            
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" />
+</form>
+  
+{% endblock %}
+
