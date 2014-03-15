@@ -29,27 +29,17 @@ def addCategory(request):
             name = form.cleaned_data['name']
             category = Category.objects.create(name=name)
 	    return HttpResponseRedirect('/thanks/')
-           # return HttpResponseRedirect(reverse('category_detail', kwargs={'category_id': category.id}))
- 
-    return render_to_response(request, 'crime/addCategory.html', {
-       'form': form,
-   })
+            
+    context = {'form': form}
+    return render(request, 'crime/addCategory.html', context)
 
 def index(request, **kwargs):
-	"""
-	Index page
-	Template:  ``crime/index.html``
-	Context:
-        	object_list
-            		List of yahoo answers
-	"""
+	
 	if request.method == 'GET':
         	form = CategoryForm()
     	else:
 
-        	form = CategoryForm(request.POST)
-  
-	#form = CategoryForm()
+        	form = CategoryForm(request.POST)  
 		if form.is_valid():
 			#form.save()
 			name = form.cleaned_data['name']

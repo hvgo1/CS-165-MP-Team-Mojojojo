@@ -1,7 +1,6 @@
-<form action="{% url 'crime/addCategory.html' %}" method="post">                                                            
-  {% csrf_token %}
-  <label for="name"></label>
-  <input type="text" name="name" id="name" />
-  <input type="submit" />
+<h1>Add a Category</h1>
 </form>
-
+<form name="addCategory" action="html_form_action.asp" method="get">
+Category Name: <input type="text" name="user"><br>
+<input type="submit" value="Submit">
+</form> 
