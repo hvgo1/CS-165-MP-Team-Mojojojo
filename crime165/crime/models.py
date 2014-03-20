@@ -46,22 +46,22 @@ class Crime(models.Model):
     #was_published_recently.boolean = True
     #was_published_recently.short_description = 'Published recently?'
 
-#class CrimeForm(ModelForm):
-#    class Meta:
-#        model = Crime
+class CrimeForm(ModelForm):
+    class Meta:
+        model = Crime
 
 class CategoryForm(ModelForm):
     class Meta:
         model = Category
 
-#class LocationForm(ModelForm):
-#    class Meta:
-#        model = Location
+class LocationForm(ModelForm):
+    class Meta:
+        model = Location
 
-#class AgentForm(ModelForm):
-#    class Meta:
-#        model = Agent
+class AgentForm(ModelForm):
+    class Meta:
+        model = Agent
 
-#class SuspectForm(ModelForm):
-#    class Meta:
-#        model = Suspect
+class SuspectForm(ModelForm):
+    class Meta:
+        model = Suspect

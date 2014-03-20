@@ -1,0 +1,14 @@
+{% extends "crime/base.html" %}
+{% block title %} Add Suspect {% endblock %}
+
+
+{% block content %}
+<h1>Add a Suspect</h1>
+<form action="" method="post">
+  {% csrf_token %}
+  {{ form }}
+<input type="submit" value="Record Suspect"/>
+</form> 
+
+{% endblock %}
+
