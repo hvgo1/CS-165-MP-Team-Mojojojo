@@ -1,6 +1,14 @@
+{% extends "crime/base.html" %}
+{% block title %} Add Category {% endblock %}
+
+
+{% block content %}
 <h1>Add a Category</h1>
-</form>
-<form name="addCategory" action="html_form_action.asp" method="get">
-Category Name: <input type="text" name="user"><br>
-<input type="submit" value="Submit">
+<form action="" method="post">
+  {% csrf_token %}
+  {{ form }}
+<input type="submit" value="Submit Category"/>
 </form> 
+
+{% endblock %}
+

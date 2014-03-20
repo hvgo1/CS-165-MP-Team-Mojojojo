@@ -18,20 +18,17 @@ from crime.models import CategoryForm
  
  
 def addCategory(request):
-    if request.method == 'GET':
-        form = CategoryForm()
-    else:
-
-        form = CategoryForm(request.POST)
-  
-        if form.is_valid():
-		#form.save()
-            name = form.cleaned_data['name']
-            category = Category.objects.create(name=name)
-	    return HttpResponseRedirect('/thanks/')
+    	if request.method == 'GET':
+        	form = CategoryForm()
+    	else:
+       	        form = CategoryForm(request.POST)
+	         
+                if form.is_valid():
+			form.save()
+            		return HttpResponseRedirect('addCategory')
             
-    context = {'form': form}
-    return render(request, 'crime/addCategory.html', context)
+    	
+    	return render(request,'crime/addCategory.html', {'form': form})
 
 def index(request, **kwargs):
 	
@@ -41,12 +38,11 @@ def index(request, **kwargs):
 
         	form = CategoryForm(request.POST)  
 		if form.is_valid():
-			#form.save()
-			name = form.cleaned_data['name']
-            		category = Category.objects.create(name=name)
-			return HttpResponseRedirect(reverse('crime/index.html'))
+			form.save()
+			
+			return HttpResponseRedirect('')
 	
-    	return render_to_response('crime/index.html', {'form': form})
+    	return render(request,'crime/index.html', {'form': form})
 	
 
 #class IndexView(generic.ListView):
