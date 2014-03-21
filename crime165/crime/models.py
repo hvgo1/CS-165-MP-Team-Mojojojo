@@ -5,21 +5,24 @@ from django.forms import ModelForm
 
 class Location(models.Model):
     def __unicode__(self):  
-    	return self.country
+    	#return self.country
+	return u'%s, %s, %s' %(self.barangay,self.city,self.country)
     barangay = models.CharField(max_length=200)
     city= models.CharField(max_length=200)
     country = models.CharField(max_length=200)
 
 class Agent(models.Model):
     def __unicode__(self):  
-        return self.lastname
+        #return self.lastname
+	return u'%s,%s ; %s' %(self.lastname,self.firstname,self.location)
     firstname = models.CharField(max_length=200)
     lastname = models.CharField(max_length=200)
     location = models.ForeignKey(Location)
     
 class Suspect(models.Model):
     def __unicode__(self): 
-    	return self.lastname
+    	#return self.lastname
+	return u'%s,%s ; %s' %(self.lastname,self.firstname,self.location)
     firstname = models.CharField(max_length=200)
     lastname= models.CharField(max_length=200)
     location = models.ForeignKey(Location)
@@ -32,7 +35,8 @@ class Category(models.Model):
 
 class Crime(models.Model):
     def __unicode__(self):  
-    	return unicode(self.timedate)
+    	#return unicode(self.timedate)
+	return u'CATEGORY:%s; DATE&TIME:%s; LOCATION:%s; SUSPECT:%s; AGENT(s):%s' % (self.category,self.timedate, self.location,self.suspect,self.agent)
             
     category = models.ForeignKey(Category)
     timedate = models.DateTimeField('Date and Time')
@@ -49,6 +53,7 @@ class Crime(models.Model):
 class CrimeForm(ModelForm):
     class Meta:
         model = Crime
+
 
 class CategoryForm(ModelForm):
     class Meta:
