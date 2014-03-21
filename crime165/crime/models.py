@@ -2,6 +2,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.forms import ModelForm
+from django.contrib.admin import widgets   
 
 class Location(models.Model):
     def __unicode__(self):  
@@ -53,6 +54,10 @@ class Crime(models.Model):
 class CrimeForm(ModelForm):
     class Meta:
         model = Crime
+    def __init__(self, *args, **kwargs):
+       	super(CrimeForm, self).__init__(*args, **kwargs)
+        
+       	self.fields['timedate'].widget = widgets.AdminSplitDateTime()
 
 
 class CategoryForm(ModelForm):
