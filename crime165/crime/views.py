@@ -12,6 +12,10 @@ from django.template import RequestContext
 
 from crime.models import CategoryForm,AgentForm,SuspectForm,LocationForm,CrimeForm
 
+from django.views.generic.edit import UpdateView
+from django.views import generic
+from crime.models import Crime, Category
+
 def addCrime(request):
     	if request.method == 'GET':
         	form = CrimeForm()
@@ -77,18 +81,31 @@ def addCategory(request):
     	
     	return render(request,'crime/addcategory.html', {'form': form})
 
-def index(request, **kwargs):
+#def index(request, **kwargs):
 	
-	if request.method == 'GET':
-        	form = CategoryForm()
-    	else:
+#	if request.method == 'GET':
+#        	form = CategoryForm()
+#    	else:
 
-        	form = CategoryForm(request.POST)  
-		if form.is_valid():
-			form.save()
+#        	form = CategoryForm(request.POST)  
+#		if form.is_valid():
+#			form.save()
 			
-			return HttpResponseRedirect('')
+#			return HttpResponseRedirect('')
 	
-    	return render(request,'crime/index.html', {'form': form})
+#    	return render(request,'crime/index.html', {'form': form})
+class CrimeView(generic.ListView):
+    #model = Crime
+    template_name = 'crime/viewcrimes.html'
+    context_object_name = 'latest_crime_list'
+    
+    def get_queryset(self):
+        """Return the last five published crime."""
+        return Crime.objects.order_by('-timedate')[:5]
+#class CrimeUpdate(UpdateView):
+#    model = Crime
+#   template_name = 'crime/updatecrimes.html'
+#    context_object_name = 'latest_crime_list'
+#    def get_queryset(self):
+#        """Return the last five published crime."""
 	
-
