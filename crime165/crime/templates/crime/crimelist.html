@@ -1,0 +1,37 @@
+{% extends "crime/base.html" %}
+{% block title %} Recorded Crimes{% endblock %}
+
+{% block content %}
+<h1>Recorded Crimes</h1>
+{% if message %}
+ <b> {{ message }} </b>
+ <p>
+{% endif %}
+
+	<table>
+		{% for crime in crimes %}
+			<tr bgcolor='{% cycle FFFFFF,EEEEEE as rowcolor %}'>
+				<td><a href='/crime/viewcrime/{{crime.id}}'>{{crime.id}},{{crime.timedate}},{{crime.category}}</a></td>
+				<td><a href='/crime/updatecrime/{{crime.id}}'>Update</a></td>
+                		<td><a href='/crime/crimelist/deletecrime/{{crime.id}}'>Delete</a></td>
+                        </tr>
+  		{% endfor %}
+         </table>
+
+<div class = "pagination">
+    <span class = "step-links">		
+        {% if crimes.has_previous %}
+		<a href="?page={{ crimes.previous_page_number }}">previous</a>
+	{% endif %} 
+    <span class= "current">
+		 Page {{ crimes.number }} of {{ crimes.paginator.num_pages }}.
+        </span>
+        {% if crimes.has_next %}
+		<a href="?page={{ crimes.next_page_number }}">next</a>
+	{% endif %} 
+    </span>
+</div>
+        
+
+<a href='/crime/addcrime'>Add Crime</a>
+{% endblock %}

@@ -15,7 +15,7 @@ class Location(models.Model):
 class Agent(models.Model):
     def __unicode__(self):  
         #return self.lastname
-	return u'%s,%s ; %s' %(self.lastname,self.firstname,self.location)
+	return u'%s,%s' %(self.lastname,self.firstname)
     firstname = models.CharField(max_length=200)
     lastname = models.CharField(max_length=200)
     location = models.ForeignKey(Location)
@@ -23,7 +23,7 @@ class Agent(models.Model):
 class Suspect(models.Model):
     def __unicode__(self): 
     	#return self.lastname
-	return u'%s,%s ; %s' %(self.lastname,self.firstname,self.location)
+	return u'%s,%s' %(self.lastname,self.firstname)
     firstname = models.CharField(max_length=200)
     lastname= models.CharField(max_length=200)
     location = models.ForeignKey(Location)
