@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect,HttpResponse
+from django.http import HttpResponseRedirect,HttpResponse, QueryDict
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template import Context, loader
@@ -115,8 +115,13 @@ def updateCrime(request,id):
     else:
         form = CrimeForm(request.POST)         
     	if form.is_valid():
-		form.save()
-        	return HttpResponseRedirect('crime/crimelist.html')
+		crime.category_id = request.POST["category"]
+		crime.timedate = request.POST["timedate"]
+		crime.location_id = request.POST["location"]
+		crime.suspect_id = request.POST["suspect"]
+		crime.agent_id= request.POST["agent"]	
+		crime.save()
+        	return HttpResponseRedirect('crimelist')
     return render(request,'crime/updatecrime.html',{'crime':crime,'form':form,'action':'update/'+id})
 
 

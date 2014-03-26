@@ -40,7 +40,7 @@ class Crime(models.Model):
 	return u'CATEGORY:%s; DATE&TIME:%s; LOCATION:%s; SUSPECT:%s; AGENT(s):%s' % (self.category,self.timedate, self.location,self.suspect,self.agent)
             
     category = models.ForeignKey(Category)
-    timedate = models.DateTimeField('Date and Time')
+    timedate = models.DateTimeField('Date and Time( Format:YYYY-mm-dd HH:MM:SS)')
     location = models.ForeignKey(Location)
     suspect = models.ForeignKey(Suspect) #can be null if not yet solved, fix
     agent = models.ForeignKey(Agent) #can be many
@@ -54,11 +54,6 @@ class Crime(models.Model):
 class CrimeForm(ModelForm):
     class Meta:
         model = Crime
-    def __init__(self, *args, **kwargs):
-       	super(CrimeForm, self).__init__(*args, **kwargs)
-        
-       	self.fields['timedate'].widget = widgets.AdminSplitDateTime()
-
 
 class CategoryForm(ModelForm):
     class Meta:
