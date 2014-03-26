@@ -26,6 +26,35 @@ def addCrime(request):
             
     	
     	return render(request,'crime/addcrime.html', {'form': form})
+
+def deleteCrime(request,id):
+    Crime.objects.get(id=id).delete()
+    message = "crime deleted"
+    return HttpResponseRedirect('crimelist')
+
+def updateCrime(request,id):
+    crime = Crime.objects.get(id=id)
+    
+    if request.method == 'GET':
+        form = CrimeForm()
+    else:
+        form = CrimeForm(request.POST)         
+    	if form.is_valid():
+		crime.category_id = request.POST["category"]
+		crime.timedate = request.POST["timedate"]
+		crime.location_id = request.POST["location"]
+		crime.suspect_id = request.POST["suspect"]
+		crime.agent_id= request.POST["agent"]	
+		crime.save()
+        	return HttpResponseRedirect('crimelist')
+    return render(request,'crime/updatecrime.html',{'crime':crime,'form':form,'action':'update/'+id})
+
+
+def viewCrime(request,id):
+    crime = Crime.objects.get(id=id)    
+    
+    return render(request,'crime/viewcrime.html',{'crime':crime})
+
  
 def addSuspect(request):
     	if request.method == 'GET':
@@ -107,35 +136,3 @@ def CrimeList(request):
 
     return render_to_response('crime/crimelist.html',{'crimes':crimes})
 
-def updateCrime(request,id):
-    crime = Crime.objects.get(id=id)
-    
-    if request.method == 'GET':
-        form = CrimeForm()
-    else:
-        form = CrimeForm(request.POST)         
-    	if form.is_valid():
-		crime.category_id = request.POST["category"]
-		crime.timedate = request.POST["timedate"]
-		crime.location_id = request.POST["location"]
-		crime.suspect_id = request.POST["suspect"]
-		crime.agent_id= request.POST["agent"]	
-		crime.save()
-        	return HttpResponseRedirect('crimelist')
-    return render(request,'crime/updatecrime.html',{'crime':crime,'form':form,'action':'update/'+id})
-
-
-def viewCrime(request,id):
-    crime = Crime.objects.get(id=id)    
-    
-    return render(request,'crime/viewcrime.html',{'crime':crime})
-
-#class CrimeUpdate(UpdateView):
-#    model = Crime
-#   template_name = 'crime/updatecrimes.html'
-#    context_object_name = 'latest_crime_list'
-#    def get_queryset(self):
-#        """Return the last five published crime."""
-
-
-	
