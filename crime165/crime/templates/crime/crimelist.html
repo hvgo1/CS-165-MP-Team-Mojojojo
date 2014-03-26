@@ -7,17 +7,40 @@
  <b> {{ message }} </b>
  <p>
 {% endif %}
-
-	<table>
+<head>
+<style>
+table,th,td
+{
+border:1px solid black;
+border-collapse:collapse;
+}
+th,td
+{
+padding:5px;
+}
+</style>
+</head>
+<body>
+<table style="width:300px">
+<tr>
+  <th>ID</th>
+  <th>Date and Time</th>		
+  <th>Category</th>
+  <th>Actions</th>
+</tr>
+	
 		{% for crime in crimes %}
 			<tr bgcolor='{% cycle FFFFFF,EEEEEE as rowcolor %}'>
-				<td><a href='/crime/viewcrime/{{crime.id}}'>{{crime.id}},{{crime.timedate}},{{crime.category}}</a></td>
-				<td><a href='/crime/updatecrime/{{crime.id}}'>Update</a></td>
-                		<td><a href='/crime/crimelist/deletecrime/{{crime.id}}'>Delete</a></td>
+				<td><a href='/crime/viewcrime/{{crime.id}}'>{{crime.id}}</a></td>
+ 				<td>{{crime.timedate}}</td>
+				<td>{{crime.category}}</td>
+				
+				<td><a href='/crime/updatecrime/{{crime.id}}'>Update</a>
+                		<a href='/crime/crimelist/deletecrime/{{crime.id}}'>Delete</a></td>
                         </tr>
   		{% endfor %}
          </table>
-
+	</body>
 <div class = "pagination">
     <span class = "step-links">		
         {% if crimes.has_previous %}
