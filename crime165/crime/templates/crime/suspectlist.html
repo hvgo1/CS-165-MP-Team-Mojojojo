@@ -1,0 +1,61 @@
+{% extends "crime/base.html" %}
+{% block title %} Recorded Suspects{% endblock %}
+
+{% block content %}
+<h1>Recorded Suspects</h1>
+{% if message %}
+ <b> {{ message }} </b>
+ <p>
+{% endif %}
+<head>
+<style>
+table,th,td
+{
+border:1px solid black;
+border-collapse:collapse;
+}
+th,td
+{
+padding:5px;
+}
+</style>
+</head>
+<body>
+<table style="width:300px">
+<tr>
+  <th>ID</th>
+  <th>First name</th>
+  <th>Last name</th>		
+  <th>Location</th>
+  <th>Actions</th>
+</tr>
+	
+		{% for suspect in suspects %}
+			<tr bgcolor='{% cycle FFFFFF,EEEEEE as rowcolor %}'>
+				<td><a href='/crime/viewcrime/{{crime.id}}'>{{suspect.id}}</a></td>
+ 				<td>{{suspect.firstname}}</td>
+				<td>{{suspect.lastname}}</td>
+				<td>{{suspect.location}}</td>
+				<td><a href='/crime/updatesuspect/{{suspect.id}}'>Update</a>
+                		<a href='/crime/deletesuspect/{{suspect.id}}'>Delete</a></td>
+                        </tr>
+  		{% endfor %}
+         </table>
+	</body>
+<div class = "pagination">
+    <span class = "step-links">		
+        {% if suspects.has_previous %}
+		<a href="?page={{ suspects.previous_page_number }}">previous</a>
+	{% endif %} 
+    <span class= "current">
+		 Page {{ suspects.number }} of {{ suspects.paginator.num_pages }}.
+        </span>
+        {% if suspects.has_next %}
+		<a href="?page={{ suspects.next_page_number }}">next</a>
+	{% endif %} 
+    </span>
+</div>
+        
+
+<a href='/crime/addsuspect'>Add Suspect</a>
+{% endblock %}
