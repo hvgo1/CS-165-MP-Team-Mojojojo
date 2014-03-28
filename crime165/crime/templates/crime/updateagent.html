@@ -1,0 +1,18 @@
+{% extends "crime/base.html" %}
+{% block title %} Update Agent {% endblock %}
+
+
+{% block content %}
+<h1>Update Agent {{agent.id}}</h1>
+<form action="" method="post">
+  {% csrf_token %}
+ First name: {{agent.firstname}}<br>
+ Last name: {{agent.lastname}}<br>
+ Location: {{agent.location}}<br><br>
+<table>
+ {{ form }}
+</table>
+<input type="submit" value="Update Agent"/>
+</form> 
+{% endblock %}
+
