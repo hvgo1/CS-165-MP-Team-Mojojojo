@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
 from django.contrib.auth import logout
 from django.template import RequestContext
-from crime.models import CategoryForm,AgentForm,SuspectForm,LocationForm,CrimeForm,Crime, Category
+from crime.models import CategoryForm,AgentForm,SuspectForm,LocationForm,CrimeForm,Crime, Category,Suspect,Location,Agent
 from django.views.generic.edit import UpdateView
 from django.core.paginator import Paginator, InvalidPage,EmptyPage, PageNotAnInteger
 
@@ -22,7 +22,7 @@ def addCrime(request):
 	         
                 if form.is_valid():
 			form.save()
-            		return HttpResponseRedirect('addcrime')
+            		return HttpResponseRedirect('crimelist')
             
     	
     	return render(request,'crime/addcrime.html', {'form': form})
@@ -55,7 +55,7 @@ def viewCrime(request,id):
     
     return render(request,'crime/viewcrime.html',{'crime':crime})
 
- 
+
 def addSuspect(request):
     	if request.method == 'GET':
         	form = SuspectForm()
@@ -64,10 +64,34 @@ def addSuspect(request):
 	         
                 if form.is_valid():
 			form.save()
-            		return HttpResponseRedirect('addsuspect')
+            		return HttpResponseRedirect('suspectlist')
             
     	
     	return render(request,'crime/addsuspect.html', {'form': form})
+
+def deleteSuspect(request,id):
+    Suspect.objects.get(id=id).delete()
+    message = "Suspect deleted"
+    return HttpResponseRedirect('suspectlist')
+
+def updateSuspect(request,id):
+    suspect = Suspect.objects.get(id=id)
+    
+    if request.method == 'GET':
+        form = SuspectForm(instance = suspect)
+    else:
+        form = SuspectForm(request.POST)         
+    	if form.is_valid():
+		form.save()
+        	return HttpResponseRedirect('suspectlist')
+    return render(request,'crime/updatesuspect.html',{'suspect':suspect,'form':form,'action':'update/'+id})
+
+
+def viewSuspect(request,id):
+    suspect = Suspect.objects.get(id=id)    
+    
+    return render(request,'crime/viewsuspect.html',{'suspect':suspect})
+
 
 def addLocation(request):
     	if request.method == 'GET':
@@ -135,4 +159,18 @@ def CrimeList(request):
         crimes = paginator.page(paginator.num_pages)
 
     return render_to_response('crime/crimelist.html',{'crimes':crimes})
+
+def SuspectList(request):
+
+    suspectlist = Suspect.objects.all()
+    paginator = Paginator(suspectlist,5)
+    page = request.GET.get('page')
+    try:
+    	suspects = paginator.page(page) 
+    except PageNotAnInteger:
+        suspects = paginator.page(1)
+    except EmptyPage:
+        suspects = paginator.page(paginator.num_pages)
+
+    return render_to_response('crime/suspectlist.html',{'suspects':suspects})
 
