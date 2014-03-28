@@ -1,0 +1,14 @@
+{% extends "crime/base.html" %}
+{% block title %} Location {{location.id}} {% endblock %}
+
+
+{% block content %}
+<h1>Location {{location.id}}</h1>
+ 
+ Barangay: {{location.barangay}}<br>
+ City: {{location.city}}<br>
+ Country: {{location.country}}<br><br>
+  
+<a href='/crime/locationlist'>Back</a>
+{% endblock %}
+

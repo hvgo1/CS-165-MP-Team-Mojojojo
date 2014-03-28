@@ -1,0 +1,62 @@
+{% extends "crime/base.html" %}
+{% block title %} Recorded Locations{% endblock %}
+
+{% block content %}
+<h1>Recorded Locations</h1>
+{% if message %}
+ <b> {{ message }} </b>
+ <p>
+{% endif %}
+<head>
+<style>
+table,th,td
+{
+border:1px solid black;
+border-collapse:collapse;
+}
+th,td
+{
+padding:5px;
+}
+</style>
+</head>
+<body>
+<table style="width:300px">
+<tr>
+  <th>ID</th>  
+  <th>Barangay</th>
+  <th>City</th>		
+  <th>Country</th>
+  <th>Actions</th>
+</tr>
+	
+		{% for location in locations %}
+			<tr bgcolor='{% cycle FFFFFF,EEEEEE as rowcolor %}'>
+				<td><a href='/crime/viewlocation/{{location.id}}'>{{location.id}}</a></td>
+ 				
+				<td>{{location.barangay}}</td>
+				<td>{{location.city}}</td>
+				<td>{{location.country}}</td>
+				<td><a href='/crime/updatelocation/{{location.id}}'>Update</a>
+                		<a href='/crime/deletelocation/{{location.id}}'>Delete</a></td>
+                        </tr>
+  		{% endfor %}
+         </table>
+	</body>
+<div class = "pagination">
+    <span class = "step-links">		
+        {% if locations.has_previous %}
+		<a href="?page={{ locations.previous_page_number }}">previous</a>
+	{% endif %} 
+    <span class= "current">
+		 Page {{ locations.number }} of {{ locations.paginator.num_pages }}.
+        </span>
+        {% if locations.has_next %}
+		<a href="?page={{ locations.next_page_number }}">next</a>
+	{% endif %} 
+    </span>
+</div>
+        
+
+<a href='/crime/addlocation'>Add Location</a>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "crime/base.html" %}
+{% block title %} Update Location {% endblock %}
+
+
+{% block content %}
+<h1>Update Location {{location.id}}</h1>
+<form action="" method="post">
+  {% csrf_token %}
+ City: {{location.city}}<br>
+ Barangay: {{location.barangay}}<br>
+ Country: {{location.country}}<br><br>
+<table>
+ {{ form }}
+</table>
+<input type="submit" value="Update Location"/>
+</form> 
+{% endblock %}
+

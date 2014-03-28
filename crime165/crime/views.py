@@ -82,7 +82,11 @@ def updateSuspect(request,id):
     else:
         form = SuspectForm(request.POST)         
     	if form.is_valid():
-		form.save()
+		suspect.firstname = request.POST["firstname"]
+		suspect.lastname = request.POST["lastname"]
+		suspect.location_id = request.POST["location"]
+			
+		suspect.save()
         	return HttpResponseRedirect('suspectlist')
     return render(request,'crime/updatesuspect.html',{'suspect':suspect,'form':form,'action':'update/'+id})
 
@@ -101,10 +105,39 @@ def addLocation(request):
 	         
                 if form.is_valid():
 			form.save()
-            		return HttpResponseRedirect('addlocation')
+            		return HttpResponseRedirect('locationlist')
             
     	
     	return render(request,'crime/addlocation.html', {'form': form})
+
+
+def deleteLocation(request,id):
+    Location.objects.get(id=id).delete()
+    message = "Location deleted"
+    return HttpResponseRedirect('locationlist')
+
+def updateLocation(request,id):
+    location = Location.objects.get(id=id)
+    
+    if request.method == 'GET':
+        form = LocationForm(instance = location)
+    else:
+        form = LocationForm(request.POST)         
+    	if form.is_valid():
+		location.barangay = request.POST["barangay"]
+		location.city = request.POST["city"]
+		location.country = request.POST["country"]
+		location.save()
+        	return HttpResponseRedirect('locationlist')
+    return render(request,'crime/updatelocation.html',{'location':location,'form':form,'action':'update/'+id})
+
+
+def viewLocation(request,id):
+    location = Location.objects.get(id=id)    
+    
+    return render(request,'crime/viewlocation.html',{'location':location})
+
+
 
 def addAgent(request):
     	if request.method == 'GET':
@@ -173,4 +206,18 @@ def SuspectList(request):
         suspects = paginator.page(paginator.num_pages)
 
     return render_to_response('crime/suspectlist.html',{'suspects':suspects})
+
+def LocationList(request):
+
+    locationlist = Location.objects.all()
+    paginator = Paginator(locationlist,5)
+    page = request.GET.get('page')
+    try:
+    	locations = paginator.page(page) 
+    except PageNotAnInteger:
+        locations = paginator.page(1)
+    except EmptyPage:
+        locations = paginator.page(paginator.num_pages)
+
+    return render_to_response('crime/locationlist.html',{'locations':locations})
 

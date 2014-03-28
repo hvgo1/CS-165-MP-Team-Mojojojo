@@ -32,7 +32,7 @@ padding:5px;
 	
 		{% for suspect in suspects %}
 			<tr bgcolor='{% cycle FFFFFF,EEEEEE as rowcolor %}'>
-				<td><a href='/crime/viewcrime/{{crime.id}}'>{{suspect.id}}</a></td>
+				<td><a href='/crime/viewsuspect/{{suspect.id}}'>{{suspect.id}}</a></td>
  				<td>{{suspect.firstname}}</td>
 				<td>{{suspect.lastname}}</td>
 				<td>{{suspect.location}}</td>
