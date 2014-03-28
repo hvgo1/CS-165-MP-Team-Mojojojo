@@ -3,7 +3,7 @@ from django.conf.urls import patterns, url
 from crime import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.home, name='home'),
 
     url(r'^addcrime', views.addCrime, name='addcrime'),
     url(r'^crimelist', views.CrimeList, name ='crimelist'), 

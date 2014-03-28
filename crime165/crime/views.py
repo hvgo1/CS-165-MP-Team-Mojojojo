@@ -14,15 +14,8 @@ from django.views.generic.edit import UpdateView
 from django.core.paginator import Paginator, InvalidPage,EmptyPage, PageNotAnInteger
 
 # HOME page
-def index(request, **kwargs):
-	if request.method == 'GET':
-       	  	form = CategoryForm()
-    	else:
-        	form = CategoryForm(request.POST)  
-		if form.is_valid():
-			form.save()
-			return HttpResponseRedirect('')
-    	return render(request,'crime/index.html', {'form': form})
+def home(request):
+    return render(request,'crime/home.html')
 
 # CREATE crime, suspect, location, agent, category
 def addCrime(request):
