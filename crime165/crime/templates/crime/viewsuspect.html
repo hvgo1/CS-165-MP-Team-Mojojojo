@@ -1,0 +1,14 @@
+{% extends "crime/base.html" %}
+{% block title %} Suspect {{suspect.id}} {% endblock %}
+
+
+{% block content %}
+<h1>Suspect {{suspect.id}}</h1>
+
+ First name: {{suspect.firstname}}<br>
+ Last name: {{suspect.lastname}}<br>
+ Location: {{suspect.location}}<br><br>
+  
+<a href='/crime/suspectlist'>Back</a>
+{% endblock %}
+
