@@ -1,0 +1,62 @@
+{% extends "crime/base.html" %}
+{% block title %} Recorded Agents{% endblock %}
+
+{% block content %}
+<h1>Recorded Agents</h1>
+{% if message %}
+ <b> {{ message }} </b>
+ <p>
+{% endif %}
+<head>
+<style>
+table,th,td
+{
+border:1px solid black;
+border-collapse:collapse;
+}
+th,td
+{
+padding:5px;
+}
+</style>
+</head>
+<body>
+<table style="width:300px">
+<tr>
+  <th>ID</th>  
+  <th>First name</th>
+  <th>Last name</th>		
+  <th>Location</th>
+  <th>Actions</th>
+</tr>
+	
+		{% for agent in agents %}
+			<tr bgcolor='{% cycle FFFFFF,EEEEEE as rowcolor %}'>
+				<td><a href='/crime/viewagent/{{agent.id}}'>{{agent.id}}</a></td>
+ 				
+				<td>{{agent.firstname}}</td>
+				<td>{{agent.lastname}}</td>
+				<td>{{agent.location}}</td>
+				<td><a href='/crime/updateagent/{{agent.id}}'>Update</a>
+                		<a href='/crime/deleteagent/{{agent.id}}'>Delete</a></td>
+                        </tr>
+  		{% endfor %}
+         </table>
+	</body>
+<div class = "pagination">
+    <span class = "step-links">		
+        {% if agents.has_previous %}
+		<a href="?page={{ agents.previous_page_number }}">previous</a>
+	{% endif %} 
+    <span class= "current">
+		 Page {{ agents.number }} of {{ agents.paginator.num_pages }}.
+        </span>
+        {% if agents.has_next %}
+		<a href="?page={{ agents.next_page_number }}">next</a>
+	{% endif %} 
+    </span>
+</div>
+        
+
+<a href='/crime/addagent'>Add Agent</a>
+{% endblock %}
