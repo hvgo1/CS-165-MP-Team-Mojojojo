@@ -214,7 +214,7 @@ def updateLocation(request,id):
 def updateAgent(request,id):
     agent = Agent.objects.get(id=id)
     if request.method == 'GET':
-        form = AgentForm(instance = location)
+        form = AgentForm(instance = agent)
     else:
         form = AgentForm(request.POST)         
     	if form.is_valid():
