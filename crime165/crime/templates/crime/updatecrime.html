@@ -1,0 +1,20 @@
+{% extends "crime/base.html" %}
+{% block title %} Update Crime {% endblock %}
+
+
+{% block content %}
+<h1>Update Crime {{crime.id}}</h1>
+<form action="" method="post">
+  {% csrf_token %}
+ Category: {{crime.category}}<br>
+ Date and Time: {{crime.timedate}}<br>
+ Location: {{crime.location}}<br>
+ Suspect: {{crime.suspect}}<br>
+ Agent: {{crime.agent}}<br><br>
+<table>
+ {{ form }}
+</table>
+<input type="submit" value="Update Crime"/>
+</form> 
+{% endblock %}
+

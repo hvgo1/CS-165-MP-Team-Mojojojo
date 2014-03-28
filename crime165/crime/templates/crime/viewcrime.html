@@ -1,0 +1,16 @@
+{% extends "crime/base.html" %}
+{% block title %} Crime {{crime.id}} {% endblock %}
+
+
+{% block content %}
+<h1>Crime {{crime.id}}</h1>
+
+ Category: {{crime.category}}<br>
+ Date and Time: {{crime.timedate}}<br>
+ Location: {{crime.location}}<br>
+ Suspect: {{crime.suspect}}<br>
+ Agent: {{crime.agent}}<br><br>
+  
+<a href='/crime/crimelist'>Back</a>
+{% endblock %}
+

@@ -6,8 +6,10 @@
 <h1>Add an Agent</h1>
 <form action="" method="post">
   {% csrf_token %}
+<table>
   {{ form }}
-<input type="submit" value="Record Agent"/>
+</table>
+ <input type="submit" value="Record Agent"/>
 </form> 
 
 {% endblock %}
