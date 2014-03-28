@@ -36,7 +36,7 @@ def updateCrime(request,id):
     crime = Crime.objects.get(id=id)
     
     if request.method == 'GET':
-        form = CrimeForm()
+        form = CrimeForm(instance = crime)
     else:
         form = CrimeForm(request.POST)         
     	if form.is_valid():
