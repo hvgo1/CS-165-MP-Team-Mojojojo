@@ -52,7 +52,7 @@ def addAgent(request):
        	        form = AgentForm(request.POST)
                 if form.is_valid():
 			form.save()
-            		return HttpResponseRedirect('addagent')
+            		return HttpResponseRedirect('agentlist')
     	return render(request,'crime/addagent.html', {'form': form}) 
 def addCategory(request):
     	if request.method == 'GET':
@@ -187,21 +187,42 @@ def CategoryList(request):
 """
 # DELETE crime, suspect, location, agent, category
 def deleteCrime(request,id):
-    Crime.objects.get(id=id).delete()
-    message = "crime deleted"
-    return HttpResponseRedirect('crimelist')
+   crime = Crime.objects.get(id=id)       
+   if request.method == 'POST':    
+   
+   	Crime.objects.get(id=id).delete()
+   	#message = "crime deleted"
+	return HttpResponseRedirect('crimelist')
+            		
+   return render(request,'crime/deletecrime.html',{'crime':crime})
+
 def deleteSuspect(request,id):
-    Suspect.objects.get(id=id).delete()
-    message = "Suspect deleted"
-    return HttpResponseRedirect('suspectlist')
+   suspect = Suspect.objects.get(id=id)       
+   if request.method == 'POST':    
+   
+   	Suspect.objects.get(id=id).delete()
+   	#message = "crime deleted"
+	return HttpResponseRedirect('suspectlist')
+            		
+   return render(request,'crime/deletesuspect.html',{'suspect':suspect})
 def deleteLocation(request,id):
-    Location.objects.get(id=id).delete()
-    message = "Location deleted"
-    return HttpResponseRedirect('locationlist')
+   location = Location.objects.get(id=id)       
+   if request.method == 'POST':    
+   
+   	Location.objects.get(id=id).delete()
+   	#message = "crime deleted"
+	return HttpResponseRedirect('locationlist')
+            		
+   return render(request,'crime/deletelocation.html',{'location':location})
 def deleteAgent(request,id):
-    Agent.objects.get(id=id).delete()
-    message = "Agent deleted"
-    return HttpResponseRedirect('agentlist')
+   agent = Agent.objects.get(id=id)       
+   if request.method == 'POST':    
+   
+   	Agent.objects.get(id=id).delete()
+   	#message = "crime deleted"
+	return HttpResponseRedirect('agentlist')
+            		
+   return render(request,'crime/deleteagent.html',{'agent':agent})
 """
 def deleteCategory(request,id):
     Category.objects.get(id=id).delete()

@@ -1,0 +1,16 @@
+{% extends "crime/base.html" %}
+{% block title %} Location {{location.id}} {% endblock %}
+
+
+{% block content %}
+<h1>Delete Location {{location.id}}?</h1>
+<form action="" method="post">
+  {% csrf_token %}
+ Barangay: {{location.barangay}}<br>
+ City: {{location.city}}<br>
+ Country: {{location.country}}<br><br>
+<input type="submit" value="Confirm"/>
+ </form> 
+<br><a href='/crime/locationlist'>Cancel</a>
+{% endblock %}
+

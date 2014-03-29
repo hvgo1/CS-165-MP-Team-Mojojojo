@@ -1,0 +1,17 @@
+{% extends "crime/base.html" %}
+{% block title %} Agent {{agent.id}} {% endblock %}
+
+
+{% block content %}
+<h1>Delete Agent {{agent.id}}?</h1>
+<form action="" method="post">
+  {% csrf_token %}
+ First name: {{agent.firstname}}<br>
+ Last name: {{agent.lastname}}<br>
+ Location: {{agent.location}}<br><br>
+
+<input type="submit" value="Confirm"/>
+ </form> 
+<br><a href='/crime/agentlist'>Cancel</a>
+{% endblock %}
+

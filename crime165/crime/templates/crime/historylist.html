@@ -1,0 +1,64 @@
+{% extends "crime/base.html" %}
+{% block title %} Criminal History {% endblock %}
+
+{% block content %}<h1>Criminal History</h1>
+{% if message %}
+ <b> {{ message }} </b>
+ <p>
+{% endif %}
+<head>
+<style>
+table,th,td
+{
+border:1px solid black;
+border-collapse:collapse;
+}
+th,td
+{
+padding:5px;
+}
+</style>
+</head>
+<body>
+<table style="width:300px">
+<tr>
+  <th>ID</th>
+  <th>Date and Time</th>		
+  <th>Category</th>
+  <th>Suspect</th>
+  <th>Investigating Officers</th>
+  <th>Location</th>
+</tr>
+	
+		{% for crime in crimes %}
+			<tr bgcolor='{% cycle FFFFFF,EEEEEE as rowcolor %}'>
+				<td><a href='/crime/viewcrime/{{crime.id}}'>{{crime.id}}</a></td>
+ 				<td>{{crime.timedate}}</td>
+				<td>{{crime.category}} </td>
+				<td>{{crime.suspect}} </td>				
+				<td>{% for s in crime.agent.all %}
+        				<li>{{s}}</li>
+        			    {% endfor %}<br><br>
+				</td>
+				<td>{{crime.location}} </td>				
+                        </tr>
+  		{% endfor %}
+         </table>
+	</body>
+<div class = "pagination">
+    <span class = "step-links">		
+        {% if crimes.has_previous %}
+		<a href="?page={{ crimes.previous_page_number }}">previous</a>
+	{% endif %} 
+    <span class= "current">
+		 Page {{ crimes.number }} of {{ crimes.paginator.num_pages }}.
+        </span>
+        {% if crimes.has_next %}
+		<a href="?page={{ crimes.next_page_number }}">next</a>
+	{% endif %} 
+    </span>
+</div>
+        
+
+<a href='/crime/crimelist'>Back</a>
+{% endblock %}
