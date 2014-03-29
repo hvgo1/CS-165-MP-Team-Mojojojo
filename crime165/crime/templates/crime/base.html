@@ -43,11 +43,19 @@
     </div>
     <!-- END Header -->
     {% block breadcrumbs %}
-    <div class="breadcrumbs">
-    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+	<div class="breadcrumbs">
+    <center>
+	<b>
+    <a href="{% url 'crime:home' %}">{% trans 'Home' %}</a>&nbsp;&nbsp;
+    <a href="{% url 'crime:crimelist' %}">{% trans 'Crimes' %}</a>&nbsp;&nbsp;
+    <a href="{% url 'crime:agentlist' %}">{% trans 'Agents' %}</a>&nbsp;&nbsp;
+    <a href="{% url 'crime:suspectlist' %}">{% trans 'Suspects' %}</a>&nbsp;&nbsp;
+    <a href="{% url 'crime:locationlist' %}">{% trans 'Locations' %}</a>&nbsp;&nbsp;
     {% if title %} &rsaquo; {{ title }}{% endif %}
+    </b>
+	</center>
     </div>
-    {% endblock %}
+	{% endblock %}
     {% endif %}
 
     {% block messages %}
