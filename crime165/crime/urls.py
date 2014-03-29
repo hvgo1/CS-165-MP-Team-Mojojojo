@@ -28,7 +28,9 @@ urlpatterns = patterns('',
     url(r'^updateagent/agentlist', views.AgentList, name ='agentlist'),
     url(r'^deleteagent/agentlist', views.AgentList, name ='agentlist'),
     url(r'^viewagent/(?P<id>\d+)', views.viewAgent, name='viewagent'),
+
     url(r'^invlist', views.InvList, name='invlist'),
+    url(r'^historylist', views.CriminalHistory, name='historylist'),
 
     url(r'^addlocation', views.addLocation, name='addlocation'),
 	url(r'^locationlist', views.LocationList, name ='locationlist'), 

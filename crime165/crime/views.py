@@ -83,7 +83,7 @@ def viewCategory(request,id):
     return render(request,'crime/viewcategory.html',{'category':category})
 """
 def CrimeList(request):
-    crimelist = Crime.objects.all()
+    crimelist = Crime.objects.order_by('timedate')
     paginator = Paginator(crimelist,5)
     page = request.GET.get('page')
     try:
@@ -93,6 +93,25 @@ def CrimeList(request):
     except EmptyPage:
         crimes = paginator.page(paginator.num_pages)
     return render_to_response('crime/crimelist.html',{'crimes':crimes})
+"""
+def FilterCrimes(request,by):
+    if by == 1:
+	filterby = 'Murder'
+    	crimelist = Crime.objects.orderby('timedate').filter('murder')
+    elif by == 2 :
+	filterby = 'Theft'
+	crimelist = Crime.objects.orderby('timedate').filter(theft)
+ 
+    paginator = Paginator(crimelist,5)
+    page = request.GET.get('page')
+    try:
+    	crimes = paginator.page(page) 
+    except PageNotAnInteger:
+        crimes = paginator.page(1)
+    except EmptyPage:
+        crimes = paginator.page(paginator.num_pages)
+    return render_to_response('crime/crimelist.html',{'crimes':crimes}, {{'filterby':filterby}})
+"""
 def SuspectList(request):
     suspectlist = Suspect.objects.all()
     paginator = Paginator(suspectlist,5)
@@ -139,6 +158,19 @@ def InvList(request):
     except EmptyPage:
         crimes = paginator.page(paginator.num_pages)
     return render_to_response('crime/invlist.html',{'crimes':crimes})
+
+def CriminalHistory(request):
+    historylist = Crime.objects.filter(status="sol").order_by('timedate')
+    
+    paginator = Paginator(historylist,5)
+    page = request.GET.get('page')
+    try:
+    	crimes = paginator.page(page) 
+    except PageNotAnInteger:
+        crimes = paginator.page(1)
+    except EmptyPage:
+        crimes = paginator.page(paginator.num_pages)
+    return render_to_response('crime/historylist.html',{'crimes':crimes})
 
 """
 def CategoryList(request):
