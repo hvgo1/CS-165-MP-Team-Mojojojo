@@ -1,8 +1,8 @@
 {% extends "crime/base.html" %}
-{% block title %} Recorded Crimes{% endblock %}
+{% block title %} Investigating Officers{% endblock %}
 
 {% block content %}
-<h1>Recorded Crimes</h1>
+<h1>List of Investigating Officers</h1>
 {% if message %}
  <b> {{ message }} </b>
  <p>
@@ -23,21 +23,19 @@ padding:5px;
 <body>
 <table style="width:300px">
 <tr>
-  <th>ID</th>
-  <th>Date and Time</th>		
-  <th>Category</th>
-  <th>Actions</th>
+  <th>CrimeID</th>
+  <th>Investigating Officers</th>	
+ 
 </tr>
 	
 		{% for crime in crimes %}
 			<tr bgcolor='{% cycle FFFFFF,EEEEEE as rowcolor %}'>
-				<td><a href='/crime/viewcrime/{{crime.id}}'>{{crime.id}}</a></td>
- 				<td>{{crime.timedate}}</td>
-				<td>{{crime.category}} </td>
-				
-				<td><a href='/crime/updatecrime/{{crime.id}}'>Update</a>
-                		<a href='/crime/deletecrime/{{crime.id}}'>Delete</a></td>
-                        </tr>
+				<td>{{crime.id}}</td>
+				<td>{% for s in crime.agent.all %}
+        				<li>{{s}}</li>
+        			    {% endfor %}<br><br>
+				</td>
+ 	                </tr>
   		{% endfor %}
          </table>
 	</body>
@@ -56,5 +54,5 @@ padding:5px;
 </div>
         
 
-<a href='/crime/addcrime'>Add Crime</a>
+<a href='/crime/agentlist'>Back</a>
 {% endblock %}

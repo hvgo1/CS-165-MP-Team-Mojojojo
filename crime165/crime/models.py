@@ -31,25 +31,31 @@ class Suspect(models.Model):
 class Category(models.Model):
     def __unicode__(self):  
     	return self.name
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200,unique = True)
     
 
 class Crime(models.Model):
     def __unicode__(self):  
     	#return unicode(self.timedate)
 	return u'CATEGORY:%s; DATE&TIME:%s; LOCATION:%s; SUSPECT:%s; AGENT(s):%s' % (self.category,self.timedate, self.location,self.suspect,self.agent)
+    STATUS_CHOICES = (
+        ('inv', 'Investigated'),
+        ('sol', 'Solved'),
+    )
             
     category = models.ForeignKey(Category)
     timedate = models.DateTimeField('Date and Time( Format:YYYY-mm-dd HH:MM:SS)')
     location = models.ForeignKey(Location)
-    suspect = models.ForeignKey(Suspect) #can be null if not yet solved, fix
-    agent = models.ForeignKey(Agent) #can be many
+    suspect = models.ForeignKey(Suspect,null=True,blank=True)
+    agent = models.ManyToManyField(Agent,null=False,blank=False) 
+    status = models.CharField(max_length=300,choices=STATUS_CHOICES,default='inv')
     
-    def was_published_recently(self):
-    	return self.timedate >= timezone.now() - datetime.timedelta(days=1)
+    #def was_published_recently(self):
+    #	return self.timedate >= timezone.now() - datetime.timedelta(days=1)
     #was_published_recently.admin_order_field = 'timedate'
     #was_published_recently.boolean = True
     #was_published_recently.short_description = 'Published recently?'
+
 
 class CrimeForm(ModelForm):
     class Meta:

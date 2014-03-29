@@ -9,7 +9,9 @@
  Date and Time: {{crime.timedate}}<br>
  Location: {{crime.location}}<br>
  Suspect: {{crime.suspect}}<br>
- Agent: {{crime.agent}}<br><br>
+ Agent: {% for s in crime.agent.all %}
+        	<li>{{s}}</li>
+        {% endfor %}<br><br>
   
 <a href='/crime/crimelist'>Back</a>
 {% endblock %}

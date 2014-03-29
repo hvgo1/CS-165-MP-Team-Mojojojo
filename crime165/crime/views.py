@@ -133,6 +133,20 @@ def AgentList(request):
     except EmptyPage:
         agents = paginator.page(paginator.num_pages)
     return render_to_response('crime/agentlist.html',{'agents':agents})
+
+def InvList(request):
+    invlist = Crime.objects.all()
+    
+    paginator = Paginator(invlist,5)
+    page = request.GET.get('page')
+    try:
+    	crimes = paginator.page(page) 
+    except PageNotAnInteger:
+        crimes = paginator.page(1)
+    except EmptyPage:
+        crimes = paginator.page(paginator.num_pages)
+    return render_to_response('crime/invlist.html',{'crimes':crimes})
+
 """
 def CategoryList(request):
     categorylist = Category.objects.all()
@@ -181,7 +195,8 @@ def updateCrime(request,id):
 		crime.timedate = request.POST["timedate"]
 		crime.location_id = request.POST["location"]
 		crime.suspect_id = request.POST["suspect"]
-		crime.agent_id= request.POST["agent"]	
+		crime.agent_id= request.POST["agent"]
+                crime.status= request.POST["status"]	
 		crime.save()
         	return HttpResponseRedirect('crimelist')
     return render(request,'crime/updatecrime.html',{'crime':crime,'form':form,'action':'update/'+id})
