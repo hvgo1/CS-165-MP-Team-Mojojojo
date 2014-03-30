@@ -1,7 +1,7 @@
 {% extends "crime/base.html" %}
 {% block title %} Criminal History {% endblock %}
 
-{% block content %}<h1>Criminal History</h1>
+{% block content %}<center><h1>Criminal History</h1></center>
 {% if message %}
  <b> {{ message }} </b>
  <p>
@@ -20,7 +20,8 @@ padding:5px;
 </style>
 </head>
 <body>
-<table style="width:300px">
+<center>
+<table style="width:600px">
 <tr>
   <th>ID</th>
   <th>Date and Time</th>		
@@ -43,7 +44,7 @@ padding:5px;
 				<td>{{crime.location}} </td>				
                         </tr>
   		{% endfor %}
-         </table>
+         </table></center>
 	</body>
 <div class = "pagination">
     <span class = "step-links">		

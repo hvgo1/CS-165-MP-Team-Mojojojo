@@ -94,27 +94,9 @@ def CrimeList(request):
     except EmptyPage:
         crimes = paginator.page(paginator.num_pages)
     return render_to_response('crime/crimelist.html',{'crimes':crimes})
-"""
-def FilterCrimes(request,by):
-    if by == 1:
-	filterby = 'Murder'
-    	crimelist = Crime.objects.orderby('timedate').filter('murder')
-    elif by == 2 :
-	filterby = 'Theft'
-	crimelist = Crime.objects.orderby('timedate').filter(theft)
- 
-    paginator = Paginator(crimelist,5)
-    page = request.GET.get('page')
-    try:
-    	crimes = paginator.page(page) 
-    except PageNotAnInteger:
-        crimes = paginator.page(1)
-    except EmptyPage:
-        crimes = paginator.page(paginator.num_pages)
-    return render_to_response('crime/crimelist.html',{'crimes':crimes}, {{'filterby':filterby}})
-"""
+
 def SuspectList(request):
-    suspectlist = Suspect.objects.all()
+    suspectlist = Suspect.objects.order_by('id')
     paginator = Paginator(suspectlist,5)
     page = request.GET.get('page')
     try:
@@ -125,7 +107,7 @@ def SuspectList(request):
         suspects = paginator.page(paginator.num_pages)
     return render_to_response('crime/suspectlist.html',{'suspects':suspects})
 def LocationList(request):
-    locationlist = Location.objects.all()
+    locationlist = Location.objects.order_by('id')
     paginator = Paginator(locationlist,5)
     page = request.GET.get('page')
     try:
@@ -136,7 +118,7 @@ def LocationList(request):
         locations = paginator.page(paginator.num_pages)
     return render_to_response('crime/locationlist.html',{'locations':locations})
 def AgentList(request):
-    agentlist = Agent.objects.all()
+    agentlist = Agent.objects.order_by('id')
     paginator = Paginator(agentlist,5)
     page = request.GET.get('page')
     try:
@@ -148,7 +130,7 @@ def AgentList(request):
     return render_to_response('crime/agentlist.html',{'agents':agents})
 
 def InvList(request):
-    invlist = Crime.objects.all()
+    invlist = Crime.objects.order_by('id')
     
     paginator = Paginator(invlist,5)
     page = request.GET.get('page')

@@ -3,16 +3,17 @@
 
 
 {% block content %}
+<center><br><br><br><br>
 <h1>Update Agent {{agent.id}}</h1>
 <form action="" method="post">
   {% csrf_token %}
- First name: {{agent.firstname}}<br>
- Last name: {{agent.lastname}}<br>
- Location: {{agent.location}}<br><br>
+ <b>First name:</b> {{agent.firstname}}<br>
+ <b>Last name:</b> {{agent.lastname}}<br>
+ <b>Location:</b> {{agent.location}}<br><br>
 <table>
  {{ form }}
 </table>
 <input type="submit" value="Update Agent"/>
-</form> 
+</form> </center>
 {% endblock %}
 

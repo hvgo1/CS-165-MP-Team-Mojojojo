@@ -3,18 +3,19 @@
 
 
 {% block content %}
+<center><br><br><br><br>
 <h1>Delete Crime {{crime.id}}?</h1>
 <form action="" method="post">
   {% csrf_token %}
- Category: {{crime.category}}<br>
- Date and Time: {{crime.timedate}}<br>
- Location: {{crime.location}}<br>
- Suspect: {{crime.suspect}}<br>
- Agent: {% for s in crime.agent.all %}
+ <b>Category:</b> {{crime.category}}<br>
+ <b>Date and Time:</b> {{crime.timedate}}<br>
+ <b>Location:</b> {{crime.location}}<br>
+ <b>Suspect:</b> {{crime.suspect}}<br>
+ <b>Agent:</b> {% for s in crime.agent.all %}
         	<li>{{s}}</li>
         {% endfor %}<br><br>
 <input type="submit" value="Confirm"/>
  </form> 
-<br><a href='/crime/crimelist'>Cancel</a>
+<br><a href='/crime/crimelist'>Cancel</a></center>
 {% endblock %}
 

@@ -2,7 +2,7 @@
 {% block title %} Investigating Officers{% endblock %}
 
 {% block content %}
-<h1>List of Investigating Officers</h1>
+<center><h1>List of Investigating Officers</h1></center>
 {% if message %}
  <b> {{ message }} </b>
  <p>
@@ -20,8 +20,8 @@ padding:5px;
 }
 </style>
 </head>
-<body>
-<table style="width:300px">
+<body><center>
+<table style="width:600px">
 <tr>
   <th>CrimeID</th>
   <th>Investigating Officers</th>	
@@ -37,7 +37,7 @@ padding:5px;
 				</td>
  	                </tr>
   		{% endfor %}
-         </table>
+         </table></center>
 	</body>
 <div class = "pagination">
     <span class = "step-links">		

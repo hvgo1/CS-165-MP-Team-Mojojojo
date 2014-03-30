@@ -3,15 +3,18 @@
 
 
 {% block content %}
+<center><br><br><br><br>
 <h1>Delete Agent {{agent.id}}?</h1>
+
 <form action="" method="post">
   {% csrf_token %}
- First name: {{agent.firstname}}<br>
- Last name: {{agent.lastname}}<br>
- Location: {{agent.location}}<br><br>
+ <b>First name:</b> {{agent.firstname}}<br>
+ <b>Last name:</b> {{agent.lastname}}<br>
+ <b>Location:</b> {{agent.location}}<br><br>
 
 <input type="submit" value="Confirm"/>
  </form> 
-<br><a href='/crime/agentlist'>Cancel</a>
+
+<br><a href='/crime/agentlist'>Cancel</a></center>
 {% endblock %}
 

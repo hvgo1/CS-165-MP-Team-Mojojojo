@@ -3,14 +3,15 @@
 
 
 {% block content %}
+<center><br><br><br><br>
 <h1>Delete Location {{location.id}}?</h1>
 <form action="" method="post">
   {% csrf_token %}
- Barangay: {{location.barangay}}<br>
- City: {{location.city}}<br>
- Country: {{location.country}}<br><br>
+ <b>Barangay:</b> {{location.barangay}}<br>
+ <b>City:</b> {{location.city}}<br>
+ <b>Country:</b> {{location.country}}<br><br>
 <input type="submit" value="Confirm"/>
  </form> 
-<br><a href='/crime/locationlist'>Cancel</a>
+<br><a href='/crime/locationlist'>Cancel</a></center>
 {% endblock %}
 

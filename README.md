@@ -17,5 +17,5 @@ Assumed done:
 ->Again, run python manage.py syncdb. 
 ->Check the Admin (127.0.0.1:8000/admin)to check if the populate script worked.
 
-T GO to the APP:
+TO GO to the APP:
 > Type in to your browser: 127.0.0.1:8000/crime

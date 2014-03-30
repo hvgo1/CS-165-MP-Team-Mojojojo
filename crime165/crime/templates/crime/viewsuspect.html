@@ -3,12 +3,14 @@
 
 
 {% block content %}
+<center><br><br><br><br>
 <h1>Suspect {{suspect.id}}</h1>
 
- First name: {{suspect.firstname}}<br>
- Last name: {{suspect.lastname}}<br>
- Location: {{suspect.location}}<br><br>
+ <b>First name:</b> {{suspect.firstname}}<br>
+ <b>Last name:</b> {{suspect.lastname}}<br>
+ <b>Location:</b>{{suspect.location}}<br><br>
   
 <a href='/crime/suspectlist'>Back</a>
+</center>
 {% endblock %}
 
