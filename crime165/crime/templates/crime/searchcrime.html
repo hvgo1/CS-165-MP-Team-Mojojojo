@@ -3,7 +3,9 @@
 
 
 {% block content %}
+<center>
 <h1>Search Crime</h1>
+</center>
 <form action="" method="get">
   {% csrf_token %}
 <table>
@@ -28,7 +30,7 @@ padding:5px;
 </style>
 </head>
 <body>
-
+<center>
 <h2><b>SEARCH RESULTS</b></h2>
 <table style="width:300px">
 <tr> 
@@ -50,6 +52,7 @@ padding:5px;
 </tr>
 {% endfor %}
 </table>
+</center>
 </body>
 <a href='/crime/crimelist'>Back to list</a>
 {% endblock %}
