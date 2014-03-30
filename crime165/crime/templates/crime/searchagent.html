@@ -1,0 +1,51 @@
+{% extends "crime/base.html" %}
+{% block title %} Search Agent{% endblock %}
+
+
+{% block content %}
+<h1>Search Agent</h1>
+<form action="" method="get">
+  {% csrf_token %}
+<table>
+  {{form}}
+</table>
+ <input type="submit" value="Search"/>
+</form> 
+<br><br>
+
+<head>
+<style>
+table,th,td
+{
+border:1px solid black;
+border-collapse:collapse;
+}
+th,td
+{
+padding:5px;
+}
+</style>
+</head>
+<body>
+
+<h2><b>SEARCH RESULTS</b></h2>
+<table style="width:300px">
+<tr> 
+  <th><b>ID</b></th>
+  <th><b>First name:</b></th>
+  <th><b>Last name:</b></th>		
+  <th><b>Location:</b></th>
+</tr>
+{% for post in posts %}
+<tr>
+	<td>{{post.id}}</td> 
+	<td>{{post.firstname}}</td> 
+	<td>{{post.lastname}}</td>
+	<td> {{post.location}}</td>
+</tr>
+{% endfor %}
+</table>
+</body>
+<a href='/crime/agentlist'>Back to list</a>
+{% endblock %}
+

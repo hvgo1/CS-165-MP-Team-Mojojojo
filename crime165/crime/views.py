@@ -9,9 +9,10 @@ from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
 from django.contrib.auth import logout
 from django.template import RequestContext
-from crime.models import CategoryForm,AgentForm,SuspectForm,LocationForm,CrimeForm,Crime, Category,Suspect,Location,Agent
+from crime.models import CategoryForm,AgentForm,SuspectForm,LocationForm,CrimeForm,Crime, Category,Suspect,Location,Agent,Crime_Agent,SearchCrimeForm,SearchSuspectForm, SearchAgentForm
 from django.views.generic.edit import UpdateView
 from django.core.paginator import Paginator, InvalidPage,EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
 # HOME page
 def home(request):
@@ -232,18 +233,25 @@ def deleteCategory(request,id):
 # UPDATE crime, suspect, location, agent, category
 def updateCrime(request,id):
     crime = Crime.objects.get(id=id)
+#book_author = BookAuthor.objects.get(author=georfe, book=great_american_novel)
+    #ag = Crime_Agent.objects.get(crime_id=id)
+  
     if request.method == 'GET':
         form = CrimeForm(instance = crime)
     else:
-        form = CrimeForm(request.POST)         
+        form = CrimeForm(request.POST,instance = crime)         
     	if form.is_valid():
+		#crime = form.save(commit=False)
 		crime.category_id = request.POST["category"]
 		crime.timedate = request.POST["timedate"]
 		crime.location_id = request.POST["location"]
-		crime.suspect_id = request.POST["suspect"]
-		crime.agent_id= request.POST["agent"]
-                crime.status= request.POST["status"]	
+		crime.suspect_id = request.POST["suspect"]		
+                crime.status= request.POST["status"]
+		
 		crime.save()
+		m = Crime_Agent(agent_id=request.POST["agent"],crime_id=crime.id)
+		m.save()
+				
         	return HttpResponseRedirect('crimelist')
     return render(request,'crime/updatecrime.html',{'crime':crime,'form':form,'action':'update/'+id})
 def updateSuspect(request,id):
@@ -285,3 +293,38 @@ def updateAgent(request,id):
 		agent.save()
         	return HttpResponseRedirect('agentlist')
     return render(request,'crime/updateagent.html',{'agent':agent,'form':form,'action':'update/'+id})
+def searchCrime(request):
+    form = SearchCrimeForm(request.GET)
+    if form.is_valid():
+    	#try:
+       		cat = request.GET['category']
+		loc = request.GET['location']
+        	posts= Crime.objects.filter(category=cat)|Crime.objects.filter(location=loc) 
+                
+        	return render_to_response('crime/searchcrime.html', {'posts':posts, 'form':form})
+    	#except KeyError:
+    return render(request,'crime/searchcrime.html', {'form': form})
+
+def searchSuspect(request):
+    form = SearchSuspectForm(request.GET)
+    if form.is_valid():
+    	#try:
+       		f = request.GET['firstname']
+		l = request.GET['lastname']
+        	posts= Suspect.objects.filter(firstname=f)|Suspect.objects.filter(lastname=l) 
+                
+        	return render_to_response('crime/searchsuspect.html', {'posts':posts, 'form':form})
+    	#except KeyError:
+    return render(request,'crime/searchsuspect.html', {'form': form})
+
+def searchAgent(request):
+    form = SearchAgentForm(request.GET)
+    if form.is_valid():
+    	#try:
+       		f = request.GET['firstname']
+		l = request.GET['lastname']
+        	posts= Agent.objects.filter(firstname=f)|Agent.objects.filter(lastname=l) 
+                
+        	return render_to_response('crime/searchagent.html', {'posts':posts, 'form':form})
+    	#except KeyError:
+    return render(request,'crime/searchagent.html', {'form': form})

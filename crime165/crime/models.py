@@ -32,8 +32,9 @@ class Category(models.Model):
     def __unicode__(self):  
     	return self.name
     name = models.CharField(max_length=200,unique = True)
-    
 
+
+	
 class Crime(models.Model):
     def __unicode__(self):  
     	#return unicode(self.timedate)
@@ -47,7 +48,7 @@ class Crime(models.Model):
     timedate = models.DateTimeField('Date and Time( Format:YYYY-mm-dd HH:MM:SS)')
     location = models.ForeignKey(Location)
     suspect = models.ForeignKey(Suspect,null=True,blank=True)
-    agent = models.ManyToManyField(Agent,null=False,blank=False) 
+    agent = models.ManyToManyField(Agent,through='Crime_Agent',null=False,blank=False) 
     status = models.CharField(max_length=300,choices=STATUS_CHOICES,default='inv')
     
     #def was_published_recently(self):
@@ -56,6 +57,11 @@ class Crime(models.Model):
     #was_published_recently.boolean = True
     #was_published_recently.short_description = 'Published recently?'
 
+class Crime_Agent(models.Model):
+    def __unicode__(self):    
+	return self.id
+    agent = models.ForeignKey(Agent)
+    crime = models.ForeignKey(Crime)
 
 class CrimeForm(ModelForm):
     class Meta:
@@ -76,3 +82,15 @@ class AgentForm(ModelForm):
 class SuspectForm(ModelForm):
     class Meta:
         model = Suspect
+class SearchCrimeForm(ModelForm):
+    class Meta:
+        model = Crime
+	fields = ['category','location']
+class SearchSuspectForm(ModelForm):
+    class Meta:
+        model = Suspect
+	fields = ['firstname','lastname']
+class SearchAgentForm(ModelForm):
+    class Meta:
+        model = Agent
+	fields = ['firstname','lastname']
