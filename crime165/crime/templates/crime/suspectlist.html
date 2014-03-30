@@ -2,7 +2,9 @@
 {% block title %} Recorded Suspects{% endblock %}
 
 {% block content %}
+<center>
 <h1>Recorded Suspects</h1>
+</center>
 {% if message %}
  <b> {{ message }} </b>
  <p>
@@ -21,6 +23,7 @@ padding:5px;
 </style>
 </head>
 <body>
+<center>
 <table style="width:300px">
 <tr>
   <th>ID</th>
@@ -41,6 +44,7 @@ padding:5px;
                         </tr>
   		{% endfor %}
          </table>
+         </center>
 	</body>
 <div class = "pagination">
     <span class = "step-links">		
