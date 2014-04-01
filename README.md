@@ -13,7 +13,7 @@ Assumed done:
 * Template paths are changed to your own in Template dirs in settings.py ( Currently in the settings.py: '/home/jecca/Documents/CS165MP/crime165/crime165/templates',
 	'/home/jecca/Documents/CS165MP/crime165/crime/templates' )
 
-->Run python manage.py syncdb in the terminal to create tables and create the superuser/user to view the admin.
+->(Go to the path of the folder CS165MP/crime165) Run python manage.py syncdb in the terminal to create tables and create the superuser/user to view the admin.
 
 ->Also run python populate_db.py, ignore the errors created
 
