@@ -25,7 +25,11 @@ def addCrime(request):
     	else:
        	        form = CrimeForm(request.POST)
                 if form.is_valid():
-			form.save()
+			#form.save()
+			crime = Crime(category_id=request.POST["category"],timedate=request.POST["timedate"],location_id=request.POST["location"],suspect_id=request.POST["suspect"])
+			crime.save()
+			m = Crime_Agent(agent_id=request.POST["agent"],crime_id=crime.id)
+			m.save()
             		return HttpResponseRedirect('crimelist')
     	return render(request,'crime/addcrime.html', {'form': form})
 def addSuspect(request):
