@@ -36,7 +36,7 @@ urlpatterns = patterns('',
     url(r'^historylist', views.CriminalHistory, name='historylist'),
 
     url(r'^addlocation', views.addLocation, name='addlocation'),
-	url(r'^locationlist', views.LocationList, name ='locationlist'), 
+    url(r'^locationlist', views.LocationList, name ='locationlist'), 
     url(r'^updatelocation/(?P<id>\d+)', views.updateLocation, name ='updatelocation'),
     url(r'^deletelocation/(?P<id>\d+)', views.deleteLocation, name ='deleteLocation'),
     url(r'^updatelocation/locationlist', views.LocationList, name ='locationlist'),
