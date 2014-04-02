@@ -10,7 +10,7 @@ To POPULATE Database:
 
 Assumed done:
 * "crimedb" database and user "myuser" is already created through postgres and connected to django
-  ("myuser" was granted access to crimedb by command 'GRANT ALL PRIVILEGES ON DATABASE crimedb to myuser;')
+  ("myuser" was granted access to crimedb by command 'GRANT ALL PRIVILEGES ON DATABASE crimedb to myuser;' in psql)
 * Template paths are changed to your own in Template dirs in settings.py ( Currently in the settings.py: '/home/jecca/Documents/CS165MP/crime165/crime165/templates',
 	'/home/jecca/Documents/CS165MP/crime165/crime/templates' )
 
