@@ -47,10 +47,10 @@
     <center>
 	<b>
     <a href="{% url 'crime:home' %}">{% trans 'Home' %}</a>&nbsp;&nbsp;
-    <a href="{% url 'crime:crimelist' %}">{% trans 'Crimes' %}</a>&nbsp;&nbsp;
-    <a href="{% url 'crime:agentlist' %}">{% trans 'Agents' %}</a>&nbsp;&nbsp;
-    <a href="{% url 'crime:suspectlist' %}">{% trans 'Suspects' %}</a>&nbsp;&nbsp;
-    <a href="{% url 'crime:locationlist' %}">{% trans 'Locations' %}</a>&nbsp;&nbsp;
+    <a href='/crime/crimelist'>{% trans 'Crimes' %}</a>&nbsp;&nbsp;
+    <a href='/crime/agentlist'>{% trans 'Agents' %}</a>&nbsp;&nbsp;
+    <a href='/crime/suspectlist'>{% trans 'Suspects' %}</a>&nbsp;&nbsp;
+    <a href='/crime/locationlist'>{% trans 'Locations' %}</a>&nbsp;&nbsp;
     {% if title %} &rsaquo; {{ title }}{% endif %}
     </b>
 	</center>
