@@ -38,7 +38,7 @@ class Category(models.Model):
 class Crime(models.Model):
 	def __unicode__(self):  
 	#return unicode(self.timedate)
-	return u'CATEGORY:%s; DATE&TIME:%s; LOCATION:%s; SUSPECT:%s; AGENT(s):%s' % (self.category,self.timedate, self.location,self.suspect,self.agent)
+		return u'CATEGORY:%s; DATE&TIME:%s; LOCATION:%s; SUSPECT:%s; AGENT(s):%s' % (self.category,self.timedate, self.location,self.suspect,self.agent)
 	STATUS_CHOICES = (
 	('inv', 'Investigated'),
 	('sol', 'Solved'),
